@@ -10,6 +10,8 @@ cd cloverleaf
 git checkout 3e10ff9
 
 mkdir build-acpp && cd build-acpp
+
+# NOTE: cloverleaf cmake defaults to -DCMAKE_BUILD_TYPE=Release, so specifying it is not necessary to get a release build!
 cmake -DMODEL=sycl-acc -DENABLE_MPI=OFF -DSYCL_COMPILER=HIPSYCL -DHIPSYCL_TARGETS=generic -DSYCL_COMPILER_DIR=$ACPP_ROOT_DIR -DCXX_EXTRA_FLAGS="-ffast-math" ..
 make -j4
 cd ..
