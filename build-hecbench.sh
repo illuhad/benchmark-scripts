@@ -1,8 +1,8 @@
 #!/bin/bash
 
-git clone https://github.com/zjin-lcf/hecbench
+git clone https://github.com/illuhad/hecbench
 cd hecbench
-git checkout 774f0ac
+git checkout 6a853ad1
 cd ..
 
 APP_NAME=nbody sh ./build-hecbench-app.sh

@@ -8,6 +8,9 @@ acpp -O3 -ffast-math -o sycl-generic-cpu $SYCL_EXTRA_ARGS *.cpp
 acpp -O3 -ffast-math -o sycl-generic $SYCL_EXTRA_ARGS *.cpp -DUSE_GPU
 cd $root_dir
 
+cd $root_dir/$APP_NAME-cuda
+acpp --acpp-pcuda --acpp-pcuda-chevron-launch -O3 -ffast-math -o pcuda-generic `find . -maxdepth 1 -name '*.cpp' -or -name '*.cu'`
+cd $root_dir
 
 if command -v nvcc 2>&1 >/dev/null
 then

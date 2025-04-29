@@ -20,6 +20,13 @@ rm -rf $results_dir/*
 mv out_al_* $results_dir/
 mv errfile.txt $results_dir/
 
+cd $work_dir/../build-acpp-pcuda
+sh $root_dir/run-benchmark.sh ./cuda-cloverleaf --file ../InputDecks/$DECK
+mkdir -p $results_dir/pcuda
+mv out_al_* $results_dir/pcuda
+mv errfile.txt $results_dir/pcuda
+
+
 if [[ $ACPP_VISIBILITY_MASK = *cuda* ]]
 then
   cd $work_dir/../build-cuda

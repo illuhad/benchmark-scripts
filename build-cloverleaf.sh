@@ -5,14 +5,19 @@ rm -rf ./cloverleaf
 ACPP_ROOT_DIR=`acpp --acpp-version | grep 'Installation root: ' | awk '{sub(/^  Installation root: /, ""); print}'`
 echo "Root dir: ${ACPP_ROOT_DIR}"
 
-git clone https://github.com/uob-hpc/cloverleaf
+git clone https://github.com/illuhad/cloverleaf
 cd cloverleaf
-git checkout 3e10ff9
+git checkout 38e4702
 
 mkdir build-acpp && cd build-acpp
 
 # NOTE: cloverleaf cmake defaults to -DCMAKE_BUILD_TYPE=Release, so specifying it is not necessary to get a release build!
 cmake -DMODEL=sycl-acc -DENABLE_MPI=OFF -DSYCL_COMPILER=HIPSYCL -DHIPSYCL_TARGETS=generic -DSYCL_COMPILER_DIR=$ACPP_ROOT_DIR -DCXX_EXTRA_FLAGS="-ffast-math" ..
+make -j4
+cd ..
+
+mkdir build-acpp-pcuda && cd build-acpp-pcuda
+cmake -DMODEL=cuda -DENABLE_MPI=OFF -DACPP_PCUDA_DRIVER=ON -DCMAKE_CXX_COMPILER=`which acpp` -DCMAKE_CUDA_COMPILER=`which acpp` -DCXX_EXTRA_FLAGS="-ffast-math" ..
 make -j4
 cd ..
 
