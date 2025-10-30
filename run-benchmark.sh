@@ -17,7 +17,8 @@ do
   num_runs=1
   while [ "$has_converged" != true ]
   do
-    allocation_tracking=0
+    # allocation tracking is now on by default
+    #allocation_tracking=0
     # Enable Allocation tracking once it is exposed
     # to end users
     #if [ "$i" -gt "0" ] ; then
@@ -25,7 +26,7 @@ do
     #fi
 
     echo "[run-benchmark.sh] Running..."
-    ACPP_ALLOCATION_TRACKING=$allocation_tracking ACPP_ADAPTIVITY_LEVEL=$i $@ 2> $errfile 1>> $outfile
+    ACPP_ADAPTIVITY_LEVEL=$i $@ 2> $errfile 1>> $outfile
     grep "$jit_string" $errfile > /dev/null
     if [ $? = 0 ] ; then
       echo "Stil optimizing..."
