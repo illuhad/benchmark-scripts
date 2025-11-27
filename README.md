@@ -1,9 +1,9 @@
 # Benchmarking scripts
 
-1. Ensure that `acpp` is in the path; for comparing to native model performance, native compilers (`nvcc`, `hipcc`, `icpx`) need to be in path as well.
+1. Ensure that `acpp` is in the path; for comparing to native model performance, native compilers (`nvcc`, `hipcc`, `icpx`) need to be in path as well. For OpenMP, set `$OMP_CXX` to your desired OpenMP compiler for native reference runs.
 2. Run `bash ./build-bude.sh; bash ./build-cloverleaf.sh; bash ./build-hecbench.sh`
 3. Configure environment variables:
-   1. Set `ACPP_VISIBILITY_MASK` to expose only your target backend. For `icpx`, set `SYCL_DEVICE_ALLOWLIST`.
+   1. Set `ACPP_VISIBILITY_MASK` to expose *only* your target backend. For `icpx`, set `SYCL_DEVICE_ALLOWLIST`. Note: Including `omp` in `ACPP_VISIBILITY_MASK` will also trigger native OpenMP reference runs; only do this if you really want to compare against OpenMP (i.e. for a CUDA run, set `ACPP_VISIBILITY_MASK=cuda`, not `ACPP_VISIBILITY_MASK="omp;cuda"`)
    2. Set `RESULT_SUFFIX` to some identifier of your benchmark run (e.g. hardware). Result files will be placed in the directory `results-$APP_NAME-$RESULT_SUFFIX`
    3. For weaker hardware (e.g. iGPU or CPU), consider setting`SMALL_PROBLEM=1`.
 4. Run benchmarks:

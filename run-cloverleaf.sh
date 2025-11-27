@@ -27,6 +27,12 @@ mv out_al_* $results_dir/pcuda
 mv errfile.txt $results_dir/pcuda
 
 
+if [[ $ACPP_VISIBILITY_MASK = *omp* ]]
+then
+  cd $work_dir/../build-omp
+  OMP_PROC_BIND=true ./omp-cloverleaf --file ../InputDecks/$DECK > out_native.txt
+  mv out_native.txt $results_dir/
+fi
 if [[ $ACPP_VISIBILITY_MASK = *cuda* ]]
 then
   cd $work_dir/../build-cuda

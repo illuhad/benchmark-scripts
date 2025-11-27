@@ -21,6 +21,14 @@ cmake -DMODEL=cuda -DENABLE_MPI=OFF -DACPP_PCUDA_DRIVER=ON -DCMAKE_CXX_COMPILER=
 make -j4
 cd ..
 
+if command -v $OMP_CXX 2>&1 >/dev/null
+then
+  mkdir build-omp && cd build-omp
+  cmake -DMODEL=omp -DCMAKE_CXX_COMPILER=$OMP_CXX -DENABLE_MPI=OFF  -DCXX_EXTRA_FLAGS="-ffast-math  -march=native" ..
+  make -j4
+  cd ..
+fi
+
 if command -v nvcc 2>&1 >/dev/null
 then
   mkdir build-cuda && cd build-cuda

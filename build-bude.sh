@@ -15,8 +15,16 @@ make
 cd ..
 
 mkdir build-acpp-pcuda && cd build-acpp-pcuda
-acpp -O3 -ffast-math -o cuda-acpp -DCUDA ../src/main.cpp --acpp-pcuda --acpp-pcuda-chevron-launch
+acpp -O3 -ffast-math -o cuda-acpp -DCUDA ../src/main.cpp --acpp-pcuda --acpp-pcuda-chevron-launch -DUSE_SHARED
 cd ..
+
+if command -v $OMP_CXX 2>&1 >/dev/null
+then
+  mkdir build-omp && cd build-omp
+  cmake -DMODEL=omp -DCMAKE_CXX_COMPILER=$OMP_CXX -DENABLE_MPI=OFF  -DCXX_EXTRA_FLAGS="-ffast-math  -march=native" ..
+  make -j4
+  cd ..
+fi
 
 if command -v nvcc 2>&1 >/dev/null
 then

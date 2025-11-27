@@ -2,7 +2,7 @@
 
 git clone https://github.com/illuhad/hecbench
 cd hecbench
-git checkout 6a853ad1
+git checkout 340db6912f44ac0761919021e70e4782b4d8351b
 cd ..
 
 APP_NAME=nbody sh ./build-hecbench-app.sh

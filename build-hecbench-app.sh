@@ -12,6 +12,12 @@ cd $root_dir/$APP_NAME-cuda
 acpp --acpp-pcuda --acpp-pcuda-chevron-launch -O3 -ffast-math -o pcuda-generic `find . -maxdepth 1 -name '*.cpp' -or -name '*.cu'`
 cd $root_dir
 
+if command -v $OMP_CXX 2>&1 >/dev/null
+then
+  cd $root_dir/$APP_NAME-omp
+  $OMP_CXX -O3 -ffast-math -fopenmp=libomp -march=native -o omp `find . -maxdepth 1 -name '*.cpp' -or -name '*.c' -or -name '*.cxx'`
+  cd $root_dir
+fi
 if command -v nvcc 2>&1 >/dev/null
 then
   cd $root_dir/$APP_NAME-cuda
