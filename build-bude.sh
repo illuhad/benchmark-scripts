@@ -15,7 +15,7 @@ make
 cd ..
 
 mkdir build-acpp-pcuda && cd build-acpp-pcuda
-acpp -O3 -ffast-math -o cuda-acpp -DCUDA ../src/main.cpp --acpp-pcuda --acpp-pcuda-chevron-launch -DUSE_SHARED
+acpp -O3 -ffast-math -o cuda-acpp -DCUDA ../src/main.cpp --acpp-pcuda --acpp-pcuda-chevron-launch
 cd ..
 
 if command -v $OMP_CXX 2>&1 >/dev/null
